@@ -2,86 +2,149 @@
 setlocal EnableExtensions
 
 REM ============================================================
-REM Unreal Engine Plugin Packager
-REM Creates <PluginFolderName>.zip beside this BAT file.
+REM FAB Source Package Builder
+REM
+REM Put this BAT in the root of an Unreal Engine plugin.
+REM It creates:
+REM     <PluginRoot>\FAB\<PluginFolderName>.zip
+REM
+REM The ZIP contains ONLY:
+REM     Config\
+REM     Doc\
+REM     Resources\
+REM     Source\
+REM     README.md
+REM     <PluginName>.uplugin
+REM
+REM Any folder named Tests is excluded recursively.
 REM ============================================================
 
-REM Always work from the folder containing this BAT file.
 pushd "%~dp0"
 
-REM Get the current folder name for the ZIP filename.
-for %%I in ("%CD%") do set "FolderName=%%~nxI"
+for %%I in ("%CD%") do set "PLUGIN_NAME=%%~nxI"
 
-set "ZipPath=%CD%\%FolderName%.zip"
-set "TempDir=%TEMP%\UEPluginPackage_%FolderName%_%RANDOM%_%RANDOM%"
+set "FAB_DIR=%CD%\FAB"
+set "ZIP_PATH=%FAB_DIR%\%PLUGIN_NAME%.zip"
+set "TEMP_DIR=%TEMP%\FABPackage_%PLUGIN_NAME%_%RANDOM%_%RANDOM%"
 
-echo.
-echo Packaging: %FolderName%
-echo.
+REM ============================================================
+REM VALIDATION
+REM ============================================================
 
-REM Delete the previous ZIP if one already exists.
-if exist "%ZipPath%" (
-    echo Deleting previous archive...
-    del /F /Q "%ZipPath%"
-    if exist "%ZipPath%" (
+if not exist "%FAB_DIR%\" (
+    echo Creating FAB folder...
+    mkdir "%FAB_DIR%" >nul 2>&1
+    if errorlevel 1 (
         echo.
-        echo ERROR: Could not delete:
-        echo "%ZipPath%"
+        echo ERROR: Could not create:
+        echo "%FAB_DIR%"
         goto :error
     )
 )
 
-REM Create a temporary staging folder.
-mkdir "%TempDir%" >nul 2>&1
-if errorlevel 1 (
+if not exist "%CD%\README.md" (
     echo.
-    echo ERROR: Could not create temporary staging folder:
-    echo "%TempDir%"
+    echo ERROR: README.md was not found in the plugin root.
     goto :error
 )
 
-echo Copying release files...
+set "UPLUGIN_FILE="
+for %%F in ("%CD%\*.uplugin") do (
+    if not defined UPLUGIN_FILE set "UPLUGIN_FILE=%%~fF"
+)
 
-REM Copy the plugin while excluding:
-REM   - Any file or folder beginning with "."
-REM   - Binaries
-REM   - Intermediate
-REM   - Saved
-REM   - LICENSE and LICENSE.*
-REM   - All .bat files
-REM
-REM Robocopy exit codes 0-7 are successful. 8+ are failures.
-robocopy "%CD%" "%TempDir%" /E /R:0 /W:0 /NFL /NDL /NJH /NJS /NP ^
-    /XD "Binaries" "Intermediate" "Saved" ".*" ^
-    /XF ".*" "LICENSE" "LICENSE.*" "*.bat"
-
-set "RoboCode=%ERRORLEVEL%"
-
-if %RoboCode% GEQ 8 (
+if not defined UPLUGIN_FILE (
     echo.
-    echo ERROR: Robocopy failed with exit code %RoboCode%.
+    echo ERROR: No .uplugin file was found in the plugin root.
+    goto :error
+)
+
+REM ============================================================
+REM PREPARE OUTPUT
+REM ============================================================
+
+echo.
+echo ============================================================
+echo FAB Source Package Builder
+echo ============================================================
+echo.
+echo Plugin: %PLUGIN_NAME%
+echo Output:
+echo "%ZIP_PATH%"
+echo.
+
+if exist "%ZIP_PATH%" (
+    echo Deleting previous FAB ZIP...
+    del /F /Q "%ZIP_PATH%"
+    if exist "%ZIP_PATH%" (
+        echo.
+        echo ERROR: Could not delete the previous ZIP.
+        echo Make sure it is not open in another application.
+        goto :error
+    )
+)
+
+if exist "%TEMP_DIR%\" rmdir /S /Q "%TEMP_DIR%" >nul 2>&1
+mkdir "%TEMP_DIR%" >nul 2>&1
+if errorlevel 1 (
+    echo.
+    echo ERROR: Could not create temporary staging folder:
+    echo "%TEMP_DIR%"
+    goto :error
+)
+
+REM ============================================================
+REM COPY WHITELISTED CONTENT
+REM ============================================================
+
+echo Building FAB package contents...
+
+for %%D in (Config Doc Resources Source) do (
+    if exist "%CD%\%%D\" (
+        robocopy "%CD%\%%D" "%TEMP_DIR%\%%D" /E /R:0 /W:0 /NFL /NDL /NJH /NJS /NP /XD "Tests" >nul
+        if errorlevel 8 (
+            echo.
+            echo ERROR: Failed while copying %%D.
+            goto :cleanup_error
+        )
+    )
+)
+
+copy /Y "%CD%\README.md" "%TEMP_DIR%\README.md" >nul
+if errorlevel 1 (
+    echo.
+    echo ERROR: Failed to copy README.md.
     goto :cleanup_error
 )
 
+for %%F in ("%UPLUGIN_FILE%") do set "UPLUGIN_NAME=%%~nxF"
+copy /Y "%UPLUGIN_FILE%" "%TEMP_DIR%\%UPLUGIN_NAME%" >nul
+if errorlevel 1 (
+    echo.
+    echo ERROR: Failed to copy %UPLUGIN_NAME%.
+    goto :cleanup_error
+)
+
+REM ============================================================
+REM CREATE ZIP
+REM ============================================================
+
 echo Creating ZIP...
 
-powershell.exe -NoProfile -ExecutionPolicy Bypass -Command ^
-    "Compress-Archive -Path '%TempDir%\*' -DestinationPath '%ZipPath%' -CompressionLevel Optimal -Force"
-
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Compress-Archive -Path '%TEMP_DIR%\*' -DestinationPath '%ZIP_PATH%' -CompressionLevel Optimal -Force"
 if errorlevel 1 (
     echo.
     echo ERROR: ZIP creation failed.
     goto :cleanup_error
 )
 
-REM Remove temporary staging files.
-rmdir /S /Q "%TempDir%" >nul 2>&1
+rmdir /S /Q "%TEMP_DIR%" >nul 2>&1
 
 echo.
 echo ============================================================
 echo SUCCESS
 echo Created:
-echo "%ZipPath%"
+echo "%ZIP_PATH%"
 echo ============================================================
 echo.
 
@@ -90,11 +153,11 @@ pause
 exit /b 0
 
 :cleanup_error
-rmdir /S /Q "%TempDir%" >nul 2>&1
+if exist "%TEMP_DIR%\" rmdir /S /Q "%TEMP_DIR%" >nul 2>&1
 
 :error
 echo.
-echo Packaging failed.
+echo FAB packaging failed.
 echo.
 popd
 pause
