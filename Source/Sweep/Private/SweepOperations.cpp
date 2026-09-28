@@ -1,3 +1,5 @@
+﻿// Copyright Mippithedork 2026, Inc. All Rights Reserved.
+
 #include "SweepOperations.h"
 
 #include "EdGraph/EdGraph.h"
