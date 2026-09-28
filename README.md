@@ -4,12 +4,12 @@
 
 Sweep adds two focused refactoring tools to Unreal Engine Blueprint graphs: distribute one heavily reused Variable Get into local Gets beside its consumers, or consolidate several equivalent Gets back into one shared node.
 
-![Unreal Engine](https://img.shields.io/badge/Unreal%20Engine-5.8.0%20--%205.8.3-black?logo=unrealengine)  
-![Platform](https://img.shields.io/badge/Platform-Windows%2064--bit-blue)  
-![Type](https://img.shields.io/badge/Plugin-Editor%20Only-green)  
+![Unreal Engine](https://img.shields.io/badge/Unreal%20Engine-5.8.x-black?logo=unrealengine)
+![Platform](https://img.shields.io/badge/Platform-Windows%2064--bit-blue)
+![Type](https://img.shields.io/badge/Plugin-Editor%20Only-green)
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
 
-![Sweep cleaning up a Blueprint graph](Doc/Images/Sweep-Hero.gif)
+![Sweep cleaning up a Blueprint graph](Doc/Images/Sweep-Hero.png)
 
 ---
 
