@@ -8,6 +8,18 @@ A graph can become too repetitive when several local Gets reference the same var
 
 ## Exact steps
 
+<!-- Final IMAGE: docs/assets/media/consolidate-survivor.png -->
+<figure class="doc-media" data-kind="image" data-media-id="consolidate-survivor">
+  <img src="../../assets/media-placeholder.png" alt="The right-clicked Variable Get survives while equivalent selected Gets transfer their connections to it." loading="lazy">
+  <figcaption>The right-clicked Variable Get survives while equivalent selected Gets transfer their connections to it.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Show before/after Blueprint captures with three equivalent Get Health nodes selected; highlight the one right-clicked and retained, then show its combined outgoing wires.</span></figcaption>
+</figure>
+
+<figure class="doc-media doc-media-real">
+  <img src="../../../Doc/Images/Sweep-Consolidate.gif" alt="Sweep consolidating equivalent Variable Get nodes" loading="lazy">
+  <figcaption>The clicked Get survives and inherits the connections from the selected equivalent Gets.</figcaption>
+</figure>
+
+
 1. Select **at least two equivalent pure Variable Gets** inside the **same Blueprint graph**.
 2. Right-click the **Get you want to keep**, ensuring it was already part of that selection.
 3. Choose **Sweep → Consolidate Selected Variable Gets**.

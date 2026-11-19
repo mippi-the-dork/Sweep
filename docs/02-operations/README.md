@@ -4,6 +4,13 @@ Sweep provides **two complementary graph transformations**. Distribute minimizes
 
 ### Choose based on the graph
 
+<!-- Final IMAGE: docs/assets/media/operations-overview.png -->
+<figure class="doc-media" data-kind="image" data-media-id="operations-overview">
+  <img src="../assets/media-placeholder.png" alt="Distribute favors local sources and Consolidate favors fewer repeated Get nodes." loading="lazy">
+  <figcaption>Distribute favors local sources and Consolidate favors fewer repeated Get nodes.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Create two side-by-side Blueprint before/after pairs using the same variable: Distribute one shared Get into three local Gets; Consolidate three equivalent Gets into one chosen survivor.</span></figcaption>
+</figure>
+
+
 If one variable value travels to distant sections, **Distribute**. If many local Gets repeat the same variable/context and make the graph crowded, **Consolidate**.
 
 ### Distribute eligibility

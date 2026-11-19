@@ -4,6 +4,13 @@
 
 ## Try Sweep on a disposable Blueprint
 
+<!-- Final GIF: docs/assets/media/first-run.gif -->
+<figure class="doc-media" data-kind="gif" data-media-id="first-run">
+  <img src="../../assets/media-placeholder.png" alt="A shared Variable Get can be distributed into local reads and restored with Undo." loading="lazy">
+  <figcaption>A shared Variable Get can be distributed into local reads and restored with Undo.<span class="media-capture-instructions"><strong>Capture instructions · GIF:</strong> Record Get Health connected to three separate consumer nodes, right-click its node body, choose Sweep &gt; Distribute Variable Get, show the resulting local Gets, then Undo once to restore original wiring.</span></figcaption>
+</figure>
+
+
 Before applying it to a production graph, make a short test with one pure Variable Get connected to **three different consumer nodes**. Leave room for local nodes to appear beside the consumers.
 
 1. Open the Blueprint's Event Graph or another supported K2 graph.

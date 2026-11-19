@@ -8,6 +8,13 @@ Sweep v1.0.0 targets **Unreal Engine 5.8.0–5.8.3**, **Windows 64-bit**, as an 
 
 ## Install from a release
 
+<!-- Final IMAGE: docs/assets/media/install-folder.png -->
+<figure class="doc-media" data-kind="image" data-media-id="install-folder">
+  <img src="../../assets/media-placeholder.png" alt="A correct project installation places Sweep.uplugin directly inside the Sweep plugin directory." loading="lazy">
+  <figcaption>A correct project installation places Sweep.uplugin directly inside the Sweep plugin directory.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Show File Explorer at YourProject/Plugins/Sweep, with Sweep.uplugin, Source, Config, Resources and Doc visible; include the address bar proving no extra nested Sweep folder.</span></figcaption>
+</figure>
+
+
 1. Close the Unreal Editor.
 2. Open the [Sweep Releases](https://github.com/mippi-the-dork/Sweep/releases) page and select a matching ZIP if one is published for your engine.
 3. Extract the entire **Sweep** directory into `YourProject/Plugins/`.

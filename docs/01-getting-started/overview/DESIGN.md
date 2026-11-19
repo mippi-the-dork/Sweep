@@ -10,6 +10,13 @@ Sweep gives you two complementary refactors: **Distribute** turns one heavily sh
 
 ## Choose an operation
 
+<!-- Final IMAGE: docs/assets/media/overview-graph.png -->
+<figure class="doc-media" data-kind="image" data-media-id="overview-graph">
+  <img src="../../assets/media-placeholder.png" alt="Sweep can exchange long shared-variable connections for local reads, or consolidate equivalent reads when one source is clearer." loading="lazy">
+  <figcaption>Sweep can exchange long shared-variable connections for local reads, or consolidate equivalent reads when one source is clearer.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Show the same Blueprint graph before and after Distribute: one Get Health wired to three distant calculations, then three local Gets near those consumers. Make node labels and wires readable.</span></figcaption>
+</figure>
+
+
 | Your problem | Use | Expected result |
 | --- | --- | --- |
 | A shared variable wire stretches across the graph | **Distribute Variable Get** | A new Get near each destination node |

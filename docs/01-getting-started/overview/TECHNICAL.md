@@ -8,6 +8,13 @@
 
 ## Responsibilities
 
+<!-- Final IMAGE: docs/assets/media/overview-components.png -->
+<figure class="doc-media" data-kind="image" data-media-id="overview-components">
+  <img src="../../assets/media-placeholder.png" alt="Sweep separates native editor menu handling from graph transformation and data ownership." loading="lazy">
+  <figcaption>Sweep separates native editor menu handling from graph transformation and data ownership.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Diagram FSweepModule for context-menu registration and selection, SweepOperations for graph analysis/rewiring, and UE K2 Schema and UEdGraph as the native engine owners.</span></figcaption>
+</figure>
+
+
 `FSweepModule` registers a `FGraphEditorModule` node-context-menu extender and keeps pre-context-menu graph selections available. `SweepOperations` performs eligibility analysis, graph transformation, schema-aware reconnection and transactional changes.
 
 ## Supported graph and node types
