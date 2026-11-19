@@ -1,145 +1,127 @@
 # Sweep
 
-**Cleaner Blueprint graphs. Fewer long wires. Less manual cleanup.**
+**Blueprint Variable Get Refactoring for Unreal Engine**
 
-When one Blueprint Variable Get feeds calculations across a large graph, the wires can become harder to follow than the logic itself. Creating local Gets by hand is tedious; reconnecting repeated Gets to a shared source is just as repetitive.
+**Spend less time untangling wires. Spend more time building your Blueprints.**
 
-**Sweep gives you both options, directly in Unreal Engine's Blueprint Editor.** Distribute a shared Variable Get into local copies beside its consumers, or consolidate equivalent Gets back into a single chosen node—all without manually rebuilding the connections.
+Sweep brings two focused refactoring actions directly into Unreal Engine's **Blueprint graph context menu**. Distribute a shared Variable Get into local reads beside its consumers, or consolidate equivalent Gets into one chosen source—without manually recreating nodes and reconnecting all their wires.
 
-[![Unreal Engine 5.8.x](https://img.shields.io/badge/Unreal%20Engine-5.8.x-black?logo=unrealengine)](https://github.com/mippi-the-dork/Sweep/releases)
-![Windows 64-bit](https://img.shields.io/badge/Platform-Win64-blue)
-![Editor Only](https://img.shields.io/badge/Plugin-Editor%20Only-green)
-![Sweep v1.0.0](https://img.shields.io/badge/Version-1.0.0-2f93ff)
+[![Unreal Engine](https://img.shields.io/badge/Unreal%20Engine-5.8.x-black?logo=unrealengine)](https://www.unrealengine.com/) ![Platform](https://img.shields.io/badge/Platform-Win64-blue) ![Editor Only](https://img.shields.io/badge/Plugin-Editor%20Only-217346) ![Version](https://img.shields.io/badge/Sweep-v1.0.0-blue) [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-![Sweep — Blueprint Variable Get refactoring](Doc/Images/Sweep-Hero.png)
-
-### 📖 [Explore the complete Sweep documentation](https://mippi-the-dork.github.io/Sweep/)
-
-**Installation, step-by-step guides, behavior details, technical references, troubleshooting, and the roadmap** all live on the dedicated [Sweep documentation website](https://mippi-the-dork.github.io/Sweep/). This README introduces the plugin and helps you decide whether it belongs in your workflow; the documentation is the source for learning exactly how to use it.
-
-[**Get started**](https://mippi-the-dork.github.io/Sweep/?page=01-getting-started%2Ffirst-use%2FDESIGN.md) · [**Installation & compatibility**](https://mippi-the-dork.github.io/Sweep/?page=01-getting-started%2Finstall%2FDESIGN.md) · [**All operations**](https://mippi-the-dork.github.io/Sweep/?page=02-operations%2FREADME.md)
+<p align="center">
+  <img src="Doc/Images/Sweep-Hero.png" alt="Sweep refactoring Blueprint Variable Get connections in Unreal Engine" width="100%">
+</p>
 
 ---
 
-## Two ways to make a Blueprint easier to read
+## Blueprint graphs should be easier to read
 
-### Distribute — bring the value closer to where it's used
+A single Variable Get can feed calculations scattered across a Blueprint. The logic works, but long wires run through unrelated sections of the graph. At the other extreme, duplicating the same Get everywhere makes a graph crowded. Switching between those two layouts by hand means recreating nodes and reconnecting pins.
 
-One Variable Get stretched across a graph can become a web of long, crossing wires. **Distribute** creates matching local Gets near the consumer nodes, reconnects their inputs, and removes source-reachable reroutes that are genuinely unused.
+**Sweep lets you choose the clearer arrangement for each part of your graph.**
 
-Sweep creates **one replacement Get per destination node**, even if that node uses the value on several inputs. It positions new Gets near their consumers without moving the rest of your graph.
+- **Bring values closer to their consumers.** Distribute one shared Get into local copies near the nodes that use it.
+- **Reduce repeated nodes.** Consolidate equivalent selected Gets into the specific Get you want to keep.
+- **Keep existing wire routes where appropriate.** Consolidation preserves reroutes; distribution follows reroutes to real consumers and removes only those left unused.
+- **Clean up several Gets at once.** Batch-distribute eligible selected sources in a single Undo transaction.
+- **Stay inside the Blueprint Editor.** No separate tool window, custom asset or runtime gameplay system.
 
-![Sweep distributing a shared Variable Get](Doc/Images/Sweep-Distribute.gif)
+## Explore the documentation
 
-**A good fit for:** large Event Graphs, widely reused state, and any Blueprint where long value wires obscure otherwise straightforward calculations.
+> ### [**Sweep Documentation — Full User Guide and Technical Reference**](https://mippi-the-dork.github.io/Sweep/)
+>
+> **Everything you need to learn and use Sweep, in one place.** See how each refactor behaves, follow practical graph examples, understand node equivalence and reroutes, and find installation instructions, implementation details and troubleshooting guidance.
+>
+> **[Get Started](https://mippi-the-dork.github.io/Sweep/?page=01-getting-started%2FREADME.md)** · **[Operations](https://mippi-the-dork.github.io/Sweep/?page=02-operations%2FREADME.md)** · **[Graph Integrity](https://mippi-the-dork.github.io/Sweep/?page=03-graph-integrity%2FREADME.md)** · **[Troubleshooting](https://mippi-the-dork.github.io/Sweep/?page=05-support%2FREADME.md)**
 
-[See how Distribute works](https://mippi-the-dork.github.io/Sweep/?page=02-operations%2Fdistribute%2FDESIGN.md)
+The README is an overview of what Sweep offers. **The [documentation website](https://mippi-the-dork.github.io/Sweep/) is the maintained reference for exact behavior, installation, workflows and technical details.**
 
-### Consolidate — fewer copies, one shared source
+## Two operations. One cleaner graph.
 
-Sometimes the opposite is clearer: the graph has too many repeated Gets for the same value. **Consolidate** merges equivalent selected Gets into **the one you right-click**, retaining that node and its position while transferring the others' outgoing connections.
-
-Consolidation preserves existing reroute paths. It also checks the **actual variable reference and input context**, rather than trusting matching node names. Gets reading different target objects are not considered equivalent.
-
-![Sweep consolidating equivalent Variable Gets](Doc/Images/Sweep-Consolidate.gif)
-
-**A good fit for:** tightly related calculations where repeated Gets add clutter, or when you want a single shared read without manually reconstructing its wires.
-
-[See how Consolidate works](https://mippi-the-dork.github.io/Sweep/?page=02-operations%2Fconsolidate%2FDESIGN.md)
-
----
-
-## Small tool. Useful details.
-
-| Feature | What it means for your workflow |
+| Operation | What you can do |
 | --- | --- |
-| **Batch distribution** | Select several eligible Gets and clean up their long connections in one operation. |
-| **Reroute awareness** | Distribute follows reroutes to real consumers and removes only orphaned reachable reroutes; Consolidate keeps existing reroute topology. |
-| **Context-aware consolidation** | Matching names aren't enough: the variable and the input context must actually be equivalent. |
-| **Destination-based placement** | New Gets are positioned near consuming nodes with best-effort overlap avoidance; existing nodes aren't moved. |
-| **One-step Undo / Redo** | Each refactor, including an eligible batch, is recorded as a single Unreal Editor transaction. |
-| **Native workflow** | Commands appear in the Blueprint node's context menu. No new asset type or separate editor window. |
-| **Editor-only** | No Sweep runtime module, gameplay component, or additional packaged-game dependency. |
+| **[Distribute Variable Gets](https://mippi-the-dork.github.io/Sweep/?page=02-operations%2Fdistribute%2FDESIGN.md)** | Replace long shared value wires with local Gets placed near their destination nodes. |
+| **[Consolidate Variable Gets](https://mippi-the-dork.github.io/Sweep/?page=02-operations%2Fconsolidate%2FDESIGN.md)** | Combine equivalent selected Gets into the right-clicked survivor while retaining its location and outgoing reroute paths. |
+| **[Batch Distribution](https://mippi-the-dork.github.io/Sweep/?page=02-operations%2Fmulti-selection%2FDESIGN.md)** | Refactor several eligible selected Variable Gets together, with one Undo transaction. |
 
-![Sweep distributing several selected Variable Gets](Doc/Images/Sweep-MultiSelect.gif)
+Sweep follows reroute chains to the actual consuming pins, creates **one local Get per destination node**, and uses Unreal's native Blueprint schema for reconnections. Consolidation checks the underlying variable reference and input context, not just the displayed name.
 
-[Learn about batch operations](https://mippi-the-dork.github.io/Sweep/?page=02-operations%2Fmulti-selection%2FDESIGN.md) · [Understand reroute behavior](https://mippi-the-dork.github.io/Sweep/?page=03-graph-integrity%2Freroutes%2FDESIGN.md) · [Learn the equivalence rules](https://mippi-the-dork.github.io/Sweep/?page=03-graph-integrity%2Fequivalence%2FDESIGN.md)
+## Useful in real Blueprint workflows
 
-## Built for focused Blueprint cleanup
+### Untangle long shared value wires
 
-Sweep is deliberately **not** a full graph auto-layout or automatic logic optimizer. Its v1.0.0 scope is **pure Variable Get nodes in Blueprint K2 graphs**.
+When one Get stretches across unrelated calculations, Distribute creates local copies beside the consumers. Your existing nodes stay where they are; only the relevant Gets, links and unused reroutes are changed.
 
-In particular, Sweep does **not**:
+<p align="center">
+  <img src="Doc/Images/Sweep-Distribute.gif" alt="Sweep distributing a shared Blueprint Variable Get into local copies near its consumers" width="800">
+</p>
 
-- Rewrite arbitrary pure function nodes, execution logic, or Variable Set nodes.
-- Rearrange unrelated existing graph nodes or guarantee perfect placement in crowded graphs.
-- Modify variable declarations or provide a new runtime gameplay system.
-- Operate on Material, Niagara, MetaSound, Behavior Tree, or other non-K2 graph editors.
-- Offer Distribute when a Get has fewer than **two terminal consuming inputs**.
-- Consolidate Gets that reference different underlying variables or have different input/target contexts.
+### Reduce repetitive Variable Gets
 
-The operations are designed to preserve graph behavior, but a graph refactor is still an edit: **review the result and compile and test important Blueprints.**
+When several Gets read the same underlying variable from equivalent contexts, Consolidate connects their consumers to the Get you right-click. That Get stays in place, and existing reroute paths remain.
 
-[Full limitations and FAQs](https://mippi-the-dork.github.io/Sweep/?page=05-support%2Ffaq%2FDESIGN.md) · [Graph integrity and Undo](https://mippi-the-dork.github.io/Sweep/?page=03-graph-integrity%2FREADME.md)
+<p align="center">
+  <img src="Doc/Images/Sweep-Consolidate.gif" alt="Sweep consolidating equivalent Blueprint Variable Gets into a selected surviving Get" width="800">
+</p>
 
-## Download and compatibility
+### Clean up several sources in one pass
 
-| | |
-| --- | --- |
-| **Current version** | Sweep v1.0.0 |
-| **Unreal Engine** | 5.8.0–5.8.3 |
-| **Platform** | Windows 64-bit |
-| **Module** | Editor-only |
-| **Runtime dependency** | None |
+Select several eligible Gets and use **Distribute Selected Variable Gets** to clean up multiple wiring problems together. Sweep tracks the selection before Unreal opens the context menu, helping preserve the intended batch even when the visible selection changes.
 
-**[GitHub Releases](https://github.com/mippi-the-dork/Sweep/releases)** · **[Source code](https://github.com/mippi-the-dork/Sweep)** · **[Installation guide](https://mippi-the-dork.github.io/Sweep/?page=01-getting-started%2Finstall%2FDESIGN.md)**
+<p align="center">
+  <img src="Doc/Images/Sweep-MultiSelect.gif" alt="Sweep distributing multiple selected Variable Gets in a Blueprint graph" width="800">
+</p>
 
-If Sweep is available in your Fab library, it can also be installed through the Epic Games Launcher. Availability and compatible engine builds should be checked before installation.
+### Make changes without rebuilding the graph
 
----
+Sweep uses native editor transactions for Undo and Redo, and places new Gets near the destination inputs without moving unrelated nodes. The placement is best effort rather than a full automatic graph layout.
 
-## Documentation
+[**Explore reroute handling, equivalence, placement and Undo →**](https://mippi-the-dork.github.io/Sweep/?page=03-graph-integrity%2FREADME.md)
 
-Want to know exactly which nodes can be consolidated, how reroutes are handled, or why a command isn't appearing? **The dedicated documentation site is the place to look.**
+## Get Sweep
 
-| Documentation | What you'll find |
-| --- | --- |
-| **[Documentation Home](https://mippi-the-dork.github.io/Sweep/)** | Full manual and navigation |
-| [Getting Started](https://mippi-the-dork.github.io/Sweep/?page=01-getting-started%2FREADME.md) | Installing Sweep and your first refactor |
-| [Operations](https://mippi-the-dork.github.io/Sweep/?page=02-operations%2FREADME.md) | Distribute, Consolidate, batch selection, and when to use each |
-| [Graph Integrity](https://mippi-the-dork.github.io/Sweep/?page=03-graph-integrity%2FREADME.md) | Reroutes, variable equivalence, placement, safe reconnection, and Undo |
-| [Implementation](https://mippi-the-dork.github.io/Sweep/?page=04-implementation%2FREADME.md) | Source architecture and native Unreal Editor integration |
-| [Troubleshooting](https://mippi-the-dork.github.io/Sweep/?page=05-support%2Ftroubleshooting%2FDESIGN.md) | Missing commands, unexpected placement, and recovery |
-| [Roadmap](https://mippi-the-dork.github.io/Sweep/?page=ROADMAP.md) | Current release and possible future directions |
+**Sweep v1.0.0** targets **Unreal Engine 5.8.0–5.8.3 on Windows 64-bit** and runs in the **Editor only**.
 
-## Reporting issues
+Use a compatible GitHub release, install through Fab if Sweep is available in your library, or build the plugin from the source in this repository.
 
-Found an unexpected result, a broken connection, or a missing menu command? **[Open a GitHub Issue](https://github.com/mippi-the-dork/Sweep/issues)**.
+**[Download GitHub Releases](https://github.com/mippi-the-dork/Sweep/releases)** · **[Installation Guide](https://mippi-the-dork.github.io/Sweep/?page=01-getting-started%2Finstall%2FDESIGN.md)** · **[First Refactor](https://mippi-the-dork.github.io/Sweep/?page=01-getting-started%2Ffirst-use%2FDESIGN.md)**
 
-A useful report includes your Sweep/Unreal versions, the Blueprint graph type, whether you were distributing or consolidating, selected nodes, variable and target context, and steps to reproduce. **Before-and-after screenshots or a short recording** are especially helpful; include relevant Blueprint compiler errors or Output Log entries.
+## Important limitations
 
-Check the [troubleshooting guide](https://mippi-the-dork.github.io/Sweep/?page=05-support%2Ftroubleshooting%2FDESIGN.md) for common eligibility and selection issues first.
+Sweep is a **focused Blueprint authoring utility**, not a general-purpose graph optimizer or runtime system.
 
-## Feature requests
+- **Pure Variable Gets in K2 graphs only.** It does not distribute arbitrary pure functions, Variable Set nodes or execution-pin logic, and does not operate in Material, Niagara, MetaSound or other graph editors.
+- **Distribute needs at least two terminal consuming inputs.** Reroutes are followed to the actual consumers; reroute nodes alone do not satisfy the requirement.
+- **Consolidation requires equivalent variables and contexts.** Two Gets with the same visible name but different variable references or target objects are intentionally not merged. The right-clicked Get must be included in the selection.
+- **Placement is best effort.** Sweep estimates node positions, checks nearby nodes and tries alternate locations, but may need manual spacing in crowded graphs. It does not move unrelated nodes.
+- **Native graph validation still matters.** Connection changes use Unreal's K2 schema. In rare failure cases, consolidation attempts to restore a failed source's links, but a multi-source batch is not guaranteed to be all-or-nothing before Undo.
+- **Compile and test important Blueprints.** Sweep is designed to preserve the intended variable reads, but it is not a formal proof that every refactored Blueprint behaves identically.
+- **No packaged-game Sweep runtime.** The plugin itself does not add runtime systems or components; the edited Blueprint remains ordinary Blueprint data.
 
-Have an idea that would make Blueprint graphs easier to work with? Share it through **[GitHub Issues](https://github.com/mippi-the-dork/Sweep/issues)**.
+For details, see [FAQ and limitations](https://mippi-the-dork.github.io/Sweep/?page=05-support%2Ffaq%2FDESIGN.md) and [Troubleshooting](https://mippi-the-dork.github.io/Sweep/?page=05-support%2Ftroubleshooting%2FDESIGN.md).
 
-Describe the **graph problem you're trying to solve** and the before/after result you'd find useful. Sweep intentionally favors focused, predictable transformations over unrestricted graph rewriting; new operations need clear safety and behavior-preservation rules.
+## What's next?
 
-See the [Roadmap](https://mippi-the-dork.github.io/Sweep/?page=ROADMAP.md) for current scope and uncommitted research ideas.
+**Sweep v1.0.0** established Distribute, Consolidate, multi-selection and reroute-aware Variable Get refactoring.
 
-## Contributing
+Potential future research includes additional safe refactor types, clearer eligibility diagnostics, more placement control and deeper validation. **These are possibilities, not announced features or committed release plans.**
 
-**Contributions and pull requests are welcome.** For significant new transformations, open an Issue first to discuss supported node types, variable/context equivalence, connection behavior, Undo/Redo, and the required tests.
+[**View the Sweep Roadmap →**](https://mippi-the-dork.github.io/Sweep/?page=ROADMAP.md)
 
-[Explore the implementation](https://mippi-the-dork.github.io/Sweep/?page=04-implementation%2FREADME.md) · [Browse source](https://github.com/mippi-the-dork/Sweep/tree/main/Source/Sweep)
+## Issues, feature requests and contributions
+
+Found a bug? Please [open an issue](https://github.com/mippi-the-dork/Sweep/issues) with your Sweep/Unreal versions, the Blueprint graph type, the operation used, selected Gets, variable/target context, and steps to reproduce. Before-and-after screenshots, a short GIF or relevant Blueprint compiler output are especially helpful.
+
+Have an idea? [Submit a feature request](https://github.com/mippi-the-dork/Sweep/issues) describing the graph readability problem and the result you'd like to achieve.
+
+**Pull requests are welcome.** For major graph transformations, open an issue first so eligibility, connection safety, failure handling and scope can be discussed. Sweep aims to remain narrow, predictable and native to Unreal's existing Blueprint workflow.
 
 ## License
 
-Sweep is distributed under the license included in this repository. See **[LICENSE](LICENSE)** for the applicable terms.
+Sweep is distributed under the **MIT License**. See [LICENSE](LICENSE) for the full terms.
 
 ---
 
-**Sweep** is an Unreal Engine Editor plugin by **[Mippi the Dork](https://github.com/mippi-the-dork)**.
+**Sweep is created by Mippi the Dork.**
 
-**[Clean up your Blueprints. Explore the Sweep documentation →](https://mippi-the-dork.github.io/Sweep/)**
+**[Explore the Documentation](https://mippi-the-dork.github.io/Sweep/)** · **[Get Sweep](https://github.com/mippi-the-dork/Sweep/releases)** · **[Report an Issue](https://github.com/mippi-the-dork/Sweep/issues)**
