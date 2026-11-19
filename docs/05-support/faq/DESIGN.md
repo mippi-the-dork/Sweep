@@ -20,6 +20,13 @@ Select equivalent Gets and **right-click the one you want to keep**. That Get st
 
 ## Why can't I merge two Gets named Health?
 
+<!-- Final IMAGE: docs/assets/media/faq-different-target.png -->
+<figure class="doc-media" data-kind="image" data-media-id="faq-different-target">
+  <img src="../../assets/media-placeholder.png" alt="Two Gets with identical visible names can read different target objects and must remain separate." loading="lazy">
+  <figcaption>Two Gets with identical visible names can read different target objects and must remain separate.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Capture Target A -&gt; Get Health and Target B -&gt; Get Health in one Blueprint graph; make object target wires clearly visible and show they are not consolidation-equivalent.</span></figcaption>
+</figure>
+
+
 They may refer to different underlying variables or read from different target objects. Sweep checks actual `VariableReference`, pin defaults and linked context; the visible label isn't enough.
 
 ## What if Unreal deselects the other nodes when I right-click?

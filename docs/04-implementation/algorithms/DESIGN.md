@@ -8,6 +8,13 @@ Sweep modifies existing Blueprint graph content: `Variable Get` nodes and their 
 
 ## Distribute at a glance
 
+<!-- Final IMAGE: docs/assets/media/algorithms-compare.png -->
+<figure class="doc-media" data-kind="image" data-media-id="algorithms-compare">
+  <img src="../../assets/media-placeholder.png" alt="Distribution creates local sources while consolidation merges equivalent sources, retaining valid connections." loading="lazy">
+  <figcaption>Distribution creates local sources while consolidation merges equivalent sources, retaining valid connections.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Create two short flowcharts: Analyze -&gt; Group terminals -&gt; Spawn local Gets -&gt; Reconnect/Clean; and Verify equivalence -&gt; Choose clicked anchor -&gt; Transfer wires -&gt; Delete redundant Gets.</span></figcaption>
+</figure>
+
+
 Sweep finds the real consumer input pins, groups them by destination node, spawns matching Gets, positions them near their consumers, reconnects the wires, then removes only disconnected original nodes and orphaned reroutes.
 
 ## Consolidate at a glance

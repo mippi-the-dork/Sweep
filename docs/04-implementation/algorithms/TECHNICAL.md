@@ -4,6 +4,13 @@
 
 ## Source organization
 
+<!-- Final IMAGE: docs/assets/media/data-ownership.png -->
+<figure class="doc-media" data-kind="image" data-media-id="data-ownership">
+  <img src="../../assets/media-placeholder.png" alt="Sweep changes ordinary UEdGraph nodes and pin links rather than creating custom asset or runtime data." loading="lazy">
+  <figcaption>Sweep changes ordinary UEdGraph nodes and pin links rather than creating custom asset or runtime data.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Create a source ownership diagram showing SweepModule.cpp menu and snapshots, SweepOperations.cpp graph edit/transactions, and UEdGraph/UK2Node_VariableGet stored in Blueprint package; Editor-only module.</span></figcaption>
+</figure>
+
+
 | File | Responsibility |
 | --- | --- |
 | `SweepModule.cpp` | Context-menu registration, selection snapshots and action gating |

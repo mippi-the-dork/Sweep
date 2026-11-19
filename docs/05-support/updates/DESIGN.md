@@ -8,6 +8,13 @@ The repository currently identifies Sweep as **v1.0.0**, an editor-only plugin f
 
 ## Install or update
 
+<!-- Final IMAGE: docs/assets/media/update-folder.png -->
+<figure class="doc-media" data-kind="image" data-media-id="update-folder">
+  <img src="../../assets/media-placeholder.png" alt="Sweep updates should replace the complete plugin directory rather than mix release files." loading="lazy">
+  <figcaption>Sweep updates should replace the complete plugin directory rather than mix release files.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Capture File Explorer showing a matching Sweep release ZIP and YourProject/Plugins/Sweep with Sweep.uplugin, Source, Resources and Config; indicate Unreal is closed during replacement.</span></figcaption>
+</figure>
+
+
 Use a compatible version from [GitHub Releases](https://github.com/mippi-the-dork/Sweep/releases), Fab if published for your engine, or the [Sweep source](https://github.com/mippi-the-dork/Sweep). Close the editor before replacing a precompiled plugin. Replace its whole directory rather than overlaying old and new files.
 
 If using Git source, update the desired revision and rebuild the Editor target.

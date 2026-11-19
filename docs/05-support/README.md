@@ -4,6 +4,13 @@ The fastest way to diagnose Sweep is to identify **where the operation stopped**
 
 ### Start with these checks
 
+<!-- Final IMAGE: docs/assets/media/support-flow.png -->
+<figure class="doc-media" data-kind="image" data-media-id="support-flow">
+  <img src="../assets/media-placeholder.png" alt="Sweep issues can usually be narrowed to menu availability, eligibility, selection or graph reconnection." loading="lazy">
+  <figcaption>Sweep issues can usually be narrowed to menu availability, eligibility, selection or graph reconnection.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Create a simple troubleshooting flowchart with plugin enabled, K2 pure Get node body, valid terminal count or equivalent selection, then connection and layout outcomes; link branches to the manual.</span></figcaption>
+</figure>
+
+
 | Symptom | Likely check |
 | --- | --- |
 | No Sweep menu | Enabled Editor plugin, Blueprint K2 graph, pure Get node body, not a pin |

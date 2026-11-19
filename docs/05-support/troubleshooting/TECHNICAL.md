@@ -4,6 +4,13 @@
 
 ## Layered triage
 
+<!-- Final IMAGE: docs/assets/media/triage-layers.png -->
+<figure class="doc-media" data-kind="image" data-media-id="triage-layers">
+  <img src="../../assets/media-placeholder.png" alt="Sweep diagnostics proceed from module and menu conditions through selection, eligibility and graph modifications." loading="lazy">
+  <figcaption>Sweep diagnostics proceed from module and menu conditions through selection, eligibility and graph modifications.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Create a six-step technical flow: module load, menu filtering, snapshot selection, variable/consumer eligibility, schema reconnection, placement/transactions. Label each relevant C++ entry point.</span></figcaption>
+</figure>
+
+
 1. **Module installation:** Editor-only descriptor, compatible Win64 UE version, module loaded and plugins enabled.
 2. **Menu integration:** `FGraphEditorModule` extender registration; non-debug, node-body context and K2 graph schema.
 3. **Selection:** prior snapshot exists and the clicked Get belonged to the selected group; stale weak nodes are filtered.

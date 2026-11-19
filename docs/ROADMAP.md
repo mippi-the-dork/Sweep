@@ -5,6 +5,13 @@
 
 ## History
 
+<!-- Final IMAGE: docs/assets/media/roadmap-history.png -->
+<figure class="doc-media" data-kind="image" data-media-id="roadmap-history">
+  <img src="assets/media-placeholder.png" alt="Sweep v1.0.0 establishes conservative Variable Get refactoring while later ideas remain uncommitted." loading="lazy">
+  <figcaption>Sweep v1.0.0 establishes conservative Variable Get refactoring while later ideas remain uncommitted.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Create a timeline with v1.0.0 Released (Distribute, Consolidate, reroutes, batch Undo), then clearly distinct Future Research (not planned) for eligibility messages, additional safe node types and performance validation.</span></figcaption>
+</figure>
+
+
 ### v1.0.0 — Variable Get refactoring (released)
 
 Sweep launched with two focused operations:

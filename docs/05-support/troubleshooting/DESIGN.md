@@ -4,6 +4,13 @@
 
 ## Sweep is missing from the menu
 
+<!-- Final IMAGE: docs/assets/media/troubleshoot-menu.png -->
+<figure class="doc-media" data-kind="image" data-media-id="troubleshoot-menu">
+  <img src="../../assets/media-placeholder.png" alt="The Sweep menu appears for eligible pure Variable Get node bodies rather than pin clicks or arbitrary nodes." loading="lazy">
+  <figcaption>The Sweep menu appears for eligible pure Variable Get node bodies rather than pin clicks or arbitrary nodes.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Capture a side-by-side Blueprint example: context menu from eligible Get node body showing Sweep, and context menu from its output pin not showing Sweep.</span></figcaption>
+</figure>
+
+
 Confirm **Edit → Plugins → Sweep** is enabled and the editor restarted if necessary. Use a Blueprint K2 graph and right-click the **node body** of a pure Variable Get, not an output pin. Debugging mode can suppress the extension.
 
 ## Distribute doesn't appear
