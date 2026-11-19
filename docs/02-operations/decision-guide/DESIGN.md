@@ -4,6 +4,13 @@
 
 ## The visual tradeoff
 
+<!-- Final IMAGE: docs/assets/media/readability-choice.png -->
+<figure class="doc-media" data-kind="image" data-media-id="readability-choice">
+  <img src="../../assets/media-placeholder.png" alt="Local variable reads reduce wire travel, while one shared source reduces repeated Get nodes." loading="lazy">
+  <figcaption>Local variable reads reduce wire travel, while one shared source reduces repeated Get nodes.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Create one Blueprint example shown in two layouts with identical variable context: several local Gets beside consumers versus a single central Get with longer wires; label both tradeoffs.</span></figcaption>
+</figure>
+
+
 Distribute and Consolidate are opposites in layout, but neither is universally better. **Distribute minimizes wire travel** and makes each local consumer easier to read. **Consolidate minimizes repeated Get nodes** but can introduce longer shared wiring.
 
 ## Before you act

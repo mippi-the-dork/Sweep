@@ -18,6 +18,13 @@ Two Variable Gets are consolidation-compatible only when they:
 
 ## Example: same variable, different target
 
+<!-- Final IMAGE: docs/assets/media/context-comparison.png -->
+<figure class="doc-media" data-kind="image" data-media-id="context-comparison">
+  <img src="../../assets/media-placeholder.png" alt="Variable Gets with the same visible name are not equivalent when their target-object context differs." loading="lazy">
+  <figcaption>Variable Gets with the same visible name are not equivalent when their target-object context differs.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Capture two Blueprint Get Health nodes with clearly labeled Target A and Target B object wires, plus an eligible pair reading from the same target; mark the two different-target Gets Not equivalent.</span></figcaption>
+</figure>
+
+
 `Target A → Get Health` and `Target B → Get Health` are **not equivalent** even if the nodes look identical. The actual source object differs.
 
 By contrast, two reads of `Self.CurrentHealth` in the same graph with matching context can be eligible for consolidation.

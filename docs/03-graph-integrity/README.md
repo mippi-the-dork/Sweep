@@ -4,6 +4,13 @@ Sweep deliberately limits what it changes. Its purpose is to improve graph reada
 
 ### Three safety rules
 
+<!-- Final IMAGE: docs/assets/media/integrity-summary.png -->
+<figure class="doc-media" data-kind="image" data-media-id="integrity-summary">
+  <img src="../assets/media-placeholder.png" alt="Sweep validates variable identity, handles reroutes deliberately and uses Unreal K2 schema connections." loading="lazy">
+  <figcaption>Sweep validates variable identity, handles reroutes deliberately and uses Unreal K2 schema connections.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Create three labeled technical illustrations: identical VariableReference and context, reroute chains that remain or become unused, and K2 schema validating a new wire.</span></figcaption>
+</figure>
+
+
 **Actual variable identity matters.** Two `Health` Gets targeting different objects cannot safely be combined.
 
 **Reroute behavior depends on the command.** Distribute may delete source-reachable reroutes whose outputs have become unused. Consolidate retains reroute topology while transferring source connections.

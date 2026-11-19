@@ -8,6 +8,13 @@
 
 ## Reachability cleanup
 
+<!-- Final IMAGE: docs/assets/media/reroutes-algorithm.png -->
+<figure class="doc-media" data-kind="image" data-media-id="reroutes-algorithm">
+  <img src="../../assets/media-placeholder.png" alt="Orphaned reroutes are removed iteratively from downstream nodes back toward the old source." loading="lazy">
+  <figcaption>Orphaned reroutes are removed iteratively from downstream nodes back toward the old source.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Draw a before/after two-reroute chain; show downstream losing its outputs, then upstream becoming orphaned and both being removed, while a still-live branch remains.</span></figcaption>
+</figure>
+
+
 `FSweepAnalysis::ReachableKnots` tracks reroutes encountered from the original Get. `RemoveOrphanedReachableKnots` repeatedly scans this set and destroys a knot **only if** its output exists and has no links. The repeated pass allows an upstream knot to become orphaned after its downstream knot is removed.
 
 This cleanup is called from `SweepSingle` after attempted destination reconnections, **not** from consolidation.

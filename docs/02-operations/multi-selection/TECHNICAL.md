@@ -4,6 +4,13 @@
 
 ## Selection snapshots
 
+<!-- Final IMAGE: docs/assets/media/selection-snapshot.png -->
+<figure class="doc-media" data-kind="image" data-media-id="selection-snapshot">
+  <img src="../../assets/media-placeholder.png" alt="Sweep uses the stored selected Gets only when the right-clicked Get belonged to that selection." loading="lazy">
+  <figcaption>Sweep uses the stored selected Gets only when the right-clicked Get belonged to that selection.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Diagram focused Blueprint graph -&gt; selection snapshot -&gt; decision clicked Get in snapshot? Yes uses supported selected Gets; No falls back to clicked Get only.</span></figcaption>
+</figure>
+
+
 `FSweepModule::TickSelectionSnapshots` queries `FBlueprintEditorModule::GetBlueprintEditors()`, inspects each editor's focused graph, and stores weak `UEdGraphNode` pointers for the current `FGraphPanelSelectionSet`, keyed by weak graph pointer. Invalid graph entries are pruned.
 
 `ResolveSelectedVariableGets` uses the saved set **only when the clicked Variable Get was a member**. It filters to supported Gets in the same graph. Otherwise it falls back to the clicked Get alone.

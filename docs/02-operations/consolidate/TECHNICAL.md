@@ -16,6 +16,13 @@
 
 ## Failure rollback per source
 
+<!-- Final IMAGE: docs/assets/media/consolidate-transfer.png -->
+<figure class="doc-media" data-kind="image" data-media-id="consolidate-transfer">
+  <img src="../../assets/media-placeholder.png" alt="Consolidation validates transferred connections and restores a rejected source when possible." loading="lazy">
+  <figcaption>Consolidation validates transferred connections and restores a rejected source when possible.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Draw an exact TryCreateConnection branch: success transfers outgoing wires and deletes redundant source; failure attempts to restore that source original links, not the entire batch.</span></figcaption>
+</figure>
+
+
 If a schema connection unexpectedly fails, the operation tries to restore that source's original link and any earlier links already transferred from that source before returning false. Other source Gets may already have been consolidated during the same batch; this is **per-source rollback**, not an absolute whole-batch rollback guarantee.
 
 ## Reroute guarantee

@@ -8,6 +8,13 @@ Blueprint reroute nodes help route and organize wires, but they are not the fina
 
 ## During Distribute
 
+<!-- Final GIF: docs/assets/media/reroutes-demo.gif -->
+<figure class="doc-media" data-kind="gif" data-media-id="reroutes-demo">
+  <img src="../../assets/media-placeholder.png" alt="Distribution follows reroutes to the consumers and removes only reroutes with no remaining live output." loading="lazy">
+  <figcaption>Distribution follows reroutes to the consumers and removes only reroutes with no remaining live output.<span class="media-capture-instructions"><strong>Capture instructions · GIF:</strong> Record a Get feeding two consumer calculations through a two-deep branched reroute chain. Distribute it, showing new Gets near both consumers and an unrelated still-live reroute remaining.</span></figcaption>
+</figure>
+
+
 Consider `Get Health → Reroute A → Reroute B → two separate calculations`. Sweep identifies the two calculation inputs, creates Gets near the destination nodes and reconnects them.
 
 After the connection changes, some original reroutes may no longer lead anywhere. Sweep removes **only reachable reroutes whose outputs have become unused**. Reroutes that still serve another live connection should remain.
