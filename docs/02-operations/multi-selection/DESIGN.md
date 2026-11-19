@@ -24,7 +24,7 @@ Selected unsupported node types are ignored. A selected Get that does not have a
 </figure>
 
 <figure class="doc-media doc-media-real">
-  <img src="../../../Doc/Images/Sweep-MultiSelect.gif" alt="Sweep distributing several selected Variable Gets" loading="lazy">
+  <img src="../../assets/Sweep-MultiSelect.gif" alt="Sweep distributing several selected Variable Gets" loading="lazy">
   <figcaption>Several eligible selected Variable Gets can be distributed in one Undo transaction.</figcaption>
 </figure>
 

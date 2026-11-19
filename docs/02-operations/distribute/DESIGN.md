@@ -15,7 +15,7 @@ A single pure Variable Get connected to distant calculations can create long cro
 </figure>
 
 <figure class="doc-media doc-media-real">
-  <img src="../../../Doc/Images/Sweep-Distribute.gif" alt="Sweep distributing a shared Variable Get" loading="lazy">
+  <img src="../../assets/Sweep-Distribute.gif" alt="Sweep distributing a shared Variable Get" loading="lazy">
   <figcaption>Sweep replaces a long shared wire with local Gets beside its actual consumer nodes.</figcaption>
 </figure>
 

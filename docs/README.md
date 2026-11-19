@@ -4,7 +4,7 @@
 
 Sweep cleans up long Blueprint Variable Get wires by **distributing shared Gets beside their consumers** or **consolidating equivalent Gets into one chosen source**. The plugin works directly in native Blueprint K2 graphs and keeps the refactor reversible through Unreal’s Undo/Redo.
 
-![Sweep Blueprint Variable Get refactoring](https://raw.githubusercontent.com/mippi-the-dork/Sweep/main/Doc/Images/Sweep-Hero.png)
+![Sweep Blueprint Variable Get refactoring](assets/Sweep-Hero.png)
 
 *Sweep helps turn long shared Variable Get connections into readable local sources, or combine equivalent Gets when a single shared source is clearer.*
 

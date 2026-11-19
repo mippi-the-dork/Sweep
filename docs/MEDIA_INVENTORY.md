@@ -1,6 +1,6 @@
 # Sweep Documentation Media Inventory
 
-Sweep already contains the real **Sweep-Hero.png**, **Sweep-Distribute.gif**, **Sweep-Consolidate.gif**, and **Sweep-MultiSelect.gif** in its repository `Doc/Images/` directory. These are reused where they illustrate shipped behavior.
+Sweep already contains the real **Sweep-Hero.png**, **Sweep-Distribute.gif**, **Sweep-Consolidate.gif**, and **Sweep-MultiSelect.gif** in its repository `docs/assets/` directory, with published-site copies in `docs/assets/`. These are reused where they illustrate shipped behavior.
 
 The **32 planned visual placements** use the supplied neutral placeholder until authentic screenshots, diagrams, and recordings can be produced. Every placeholder has two lines below it: a reader-facing caption explaining the eventual visual, and a separate **Capture instructions · Image/GIF** line explaining exactly what to create.
 

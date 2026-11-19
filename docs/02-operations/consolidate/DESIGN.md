@@ -15,7 +15,7 @@ A graph can become too repetitive when several local Gets reference the same var
 </figure>
 
 <figure class="doc-media doc-media-real">
-  <img src="../../../Doc/Images/Sweep-Consolidate.gif" alt="Sweep consolidating equivalent Variable Get nodes" loading="lazy">
+  <img src="../../assets/Sweep-Consolidate.gif" alt="Sweep consolidating equivalent Variable Get nodes" loading="lazy">
   <figcaption>The clicked Get survives and inherits the connections from the selected equivalent Gets.</figcaption>
 </figure>
 
