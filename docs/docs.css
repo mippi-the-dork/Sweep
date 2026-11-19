@@ -174,7 +174,7 @@ code,kbd,pre,.baseline,.top-link,.source,.nav-label,.toc-inner>b,.kind-link{
 .source{padding:6px 0 6px 8px;border-left:1px solid var(--line)}
 .markdown{color:#cbd7e3;font-size:14px;overflow-wrap:anywhere}
 /* Keep Markdown images and other embedded media inside the article column.
-   Natural-size assets may be very wide (the Focus hero is a banner); allow
+   Natural-size assets may be very wide (the Sweep hero is a banner); allow
    them to shrink, but never upscale a small screenshot or distort its ratio. */
 .markdown img,
 .markdown video,

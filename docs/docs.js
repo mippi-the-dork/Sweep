@@ -254,7 +254,7 @@
     });
 
     // Images in Markdown are resolved relative to the Markdown source file,
-    // rather than the site's query-driven /Focus/ page URL. External images
+    // rather than the site's query-driven /Sweep/ page URL. External images
     // are left unchanged; this also keeps GitHub's Markdown preview correct.
     els.article.querySelectorAll('img[src]').forEach(img=>{
       const raw=img.getAttribute('src')||'';
