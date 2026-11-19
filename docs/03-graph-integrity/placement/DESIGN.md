@@ -10,6 +10,13 @@ This is meant to reduce crossing wires without making the rest of the graph jump
 
 ## Handling nearby nodes
 
+<!-- Final GIF: docs/assets/media/placement-demo.gif -->
+<figure class="doc-media" data-kind="gif" data-media-id="placement-demo">
+  <img src="../../assets/media-placeholder.png" alt="Sweep positions local Gets near consuming inputs while leaving existing graph nodes in place." loading="lazy">
+  <figcaption>Sweep positions local Gets near consuming inputs while leaving existing graph nodes in place.<span class="media-capture-instructions"><strong>Capture instructions · GIF:</strong> Record a moderately crowded Blueprint graph inside a comment box; run Distribute and show a new local Get move to an available vertical position left of its destination without shifting existing nodes.</span></figcaption>
+</figure>
+
+
 Sweep checks the approximate size and position of other nodes before choosing a location. If a target spot would overlap, it tries alternate positions above and below.
 
 Existing nodes are **not moved**. Comment boxes are treated as containers, so a new Get can appear inside an existing comment group instead of being pushed outside it.

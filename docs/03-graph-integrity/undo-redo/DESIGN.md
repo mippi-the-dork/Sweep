@@ -18,6 +18,13 @@ This does **not** mean every possible batch can never partially change. Other se
 
 ## Best verification sequence
 
+<!-- Final GIF: docs/assets/media/undo-redo.gif -->
+<figure class="doc-media" data-kind="gif" data-media-id="undo-redo">
+  <img src="../../assets/media-placeholder.png" alt="A complete Sweep refactor can be undone and redone as one Unreal Editor transaction." loading="lazy">
+  <figcaption>A complete Sweep refactor can be undone and redone as one Unreal Editor transaction.<span class="media-capture-instructions"><strong>Capture instructions · GIF:</strong> Record a shared Get distributing into local Gets, press Undo to restore the exact original nodes and wires, then Redo to reapply the refactor. Keep the camera fixed.</span></figcaption>
+</figure>
+
+
 1. Save or duplicate a representative Blueprint if it's critical.
 2. Execute a Sweep operation.
 3. Inspect its wire connections and context pins.

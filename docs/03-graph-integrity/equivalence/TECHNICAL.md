@@ -4,6 +4,13 @@
 
 ## Comparison implementation
 
+<!-- Final IMAGE: docs/assets/media/equivalence-checks.png -->
+<figure class="doc-media" data-kind="image" data-media-id="equivalence-checks">
+  <img src="../../assets/media-placeholder.png" alt="Sweep checks the underlying variable reference and every relevant input-context field before consolidating." loading="lazy">
+  <figcaption>Sweep checks the underlying variable reference and every relevant input-context field before consolidating.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Diagram the exact decision checks: same graph, pure Get, same VariableReference, SelfContextInfo, matching input names/count, defaults and same linked context pins. Show rejection on any mismatch.</span></figcaption>
+</figure>
+
+
 `AreEquivalentGetters` rejects graph mismatch, impure nodes and differing `VariableReference.IsSameReference`. It then calls `HaveEquivalentInputContext`.
 
 That comparison first checks `SelfContextInfo`, collects every `EGPD_Input` pin on both nodes, and requires identical input-pin counts. For each source input, it finds a target input **by PinName**, then requires matching `DefaultValue`, `DefaultObject`, `DefaultTextValue.EqualTo`, and equivalent incoming links.

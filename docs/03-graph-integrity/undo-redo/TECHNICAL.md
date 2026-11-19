@@ -4,6 +4,13 @@
 
 ## Transaction boundaries
 
+<!-- Final IMAGE: docs/assets/media/transaction-boundary.png -->
+<figure class="doc-media" data-kind="image" data-media-id="transaction-boundary">
+  <img src="../../assets/media-placeholder.png" alt="Sweep groups Blueprint, graph, node and schema connection changes inside one editor transaction." loading="lazy">
+  <figcaption>Sweep groups Blueprint, graph, node and schema connection changes inside one editor transaction.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Draw FScopedTransaction enclosing Blueprint Modify, Graph Modify, affected Get/consumer nodes, K2 schema TryCreateConnection, then MarkBlueprintAsModified and NotifyGraphChanged.</span></figcaption>
+</figure>
+
+
 `SweepMany` creates `FScopedTransaction("Sweep Variable Get")` for one source and `FScopedTransaction("Sweep Variable Gets")` for multiple; `ConsolidateMany` uses `FScopedTransaction("Consolidate Variable Gets")`.
 
 Blueprint and graph objects call `Modify()`. Affected nodes call `Modify()` around edits; successful operations call `FBlueprintEditorUtils::MarkBlueprintAsModified` and `SharedGraph->NotifyGraphChanged()`.

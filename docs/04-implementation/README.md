@@ -4,6 +4,13 @@ Sweep is a small, native Unreal Editor module rather than a separate graph engin
 
 ### Two C++ responsibilities
 
+<!-- Final IMAGE: docs/assets/media/architecture-intro.png -->
+<figure class="doc-media" data-kind="image" data-media-id="architecture-intro">
+  <img src="../assets/media-placeholder.png" alt="Sweep separates user-facing menu integration from the code that edits Blueprint graphs." loading="lazy">
+  <figcaption>Sweep separates user-facing menu integration from the code that edits Blueprint graphs.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Diagram FSweepModule (context menus and selection snapshots) beside SweepOperations (analysis, equivalence, placement, rewiring), both connected to Unreal Blueprint graph and K2 schema.</span></figcaption>
+</figure>
+
+
 **`FSweepModule`** registers context-menu actions, snapshots selected nodes, and determines which command can be offered. **`SweepOperations`** validates the graph, traces terminal consumers, checks equivalence and uses Unreal’s schema to modify nodes and links.
 
 ### Data ownership

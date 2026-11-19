@@ -12,6 +12,13 @@
 
 ## Search strategy
 
+<!-- Final IMAGE: docs/assets/media/placement-search.png -->
+<figure class="doc-media" data-kind="image" data-media-id="placement-search">
+  <img src="../../assets/media-placeholder.png" alt="Sweep tries nearby vertical positions and snaps the chosen Get to the Blueprint graph grid." loading="lazy">
+  <figcaption>Sweep tries nearby vertical positions and snaps the chosen Get to the Blueprint graph grid.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Create a graph-coordinate diagram with the initial point 220 units left of the destination, vertical candidate steps of 56 up/down, 18 clearance against nearby nodes and 16-unit grid snap.</span></figcaption>
+</figure>
+
+
 `FindAndApplyClearPlacement` tries the desired location, then vertical offsets in **56-unit steps**, alternating downward/upward for up to **eight attempts per direction**. If no candidate is clear, it uses the desired position anyway. The result is rounded and snapped to a **16-unit grid**.
 
 ## Boundaries

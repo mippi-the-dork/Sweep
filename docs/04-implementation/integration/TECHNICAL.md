@@ -4,6 +4,13 @@
 
 ## Registration and teardown
 
+<!-- Final IMAGE: docs/assets/media/editor-registration.png -->
+<figure class="doc-media" data-kind="image" data-media-id="editor-registration">
+  <img src="../../assets/media-placeholder.png" alt="Sweep registers a GraphEditor menu extension and a selection snapshot ticker during its editor-module lifetime." loading="lazy">
+  <figcaption>Sweep registers a GraphEditor menu extension and a selection snapshot ticker during its editor-module lifetime.<span class="media-capture-instructions"><strong>Capture instructions · Image:</strong> Create a lifecycle diagram: StartupModule registers FGraphEditorModule extender and FTSTicker; context-menu callback checks eligibility; ShutdownModule removes extender/ticker and clears weak snapshots.</span></figcaption>
+</figure>
+
+
 `FSweepModule::StartupModule` returns immediately under `IsRunningCommandlet()`, otherwise loads `FGraphEditorModule` and adds an `FGraphEditorMenuExtender_SelectedNode` delegate to `GetAllGraphEditorContextMenuExtender()`. It also registers a core ticker for selection snapshots.
 
 `ShutdownModule` removes the ticker, resets stored snapshots and removes extenders bound to the module.
