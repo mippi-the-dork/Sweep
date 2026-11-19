@@ -276,7 +276,7 @@
       "page": "05-support/faq/DESIGN.md",
       "id": "faq-different-target",
       "kind": "image",
-      "heading": "Why can’t I merge two Gets named Health?",
+      "heading": "Why can't I merge two Gets named Health?",
       "caption": "Two Gets with identical visible names can read different target objects and must remain separate.",
       "capture_instructions": "Capture Target A -> Get Health and Target B -> Get Health in one Blueprint graph; make object target wires clearly visible and show they are not consolidation-equivalent.",
       "alt": "Two Gets with identical visible names can read different target objects and must remain separate.",
