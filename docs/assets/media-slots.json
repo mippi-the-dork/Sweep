@@ -1,0 +1,326 @@
+{
+  "baseline": "Sweep v1.0.0",
+  "placeholder": "assets/media-placeholder.png",
+  "slots": [
+    {
+      "page": "01-getting-started/overview/DESIGN.md",
+      "id": "overview-graph",
+      "kind": "image",
+      "heading": "Choose an operation",
+      "caption": "Sweep can exchange long shared-variable connections for local reads, or consolidate equivalent reads when one source is clearer.",
+      "capture_instructions": "Show the same Blueprint graph before and after Distribute: one Get Health wired to three distant calculations, then three local Gets near those consumers. Make node labels and wires readable.",
+      "alt": "Sweep can exchange long shared-variable connections for local reads, or consolidate equivalent reads when one source is clearer.",
+      "final_asset": "assets/media/overview-graph.png"
+    },
+    {
+      "page": "01-getting-started/overview/TECHNICAL.md",
+      "id": "overview-components",
+      "kind": "image",
+      "heading": "Responsibilities",
+      "caption": "Sweep separates native editor menu handling from graph transformation and data ownership.",
+      "capture_instructions": "Diagram FSweepModule for context-menu registration and selection, SweepOperations for graph analysis/rewiring, and UE K2 Schema and UEdGraph as the native engine owners.",
+      "alt": "Sweep separates native editor menu handling from graph transformation and data ownership.",
+      "final_asset": "assets/media/overview-components.png"
+    },
+    {
+      "page": "01-getting-started/install/DESIGN.md",
+      "id": "install-folder",
+      "kind": "image",
+      "heading": "Install from a release",
+      "caption": "A correct project installation places Sweep.uplugin directly inside the Sweep plugin directory.",
+      "capture_instructions": "Show File Explorer at YourProject/Plugins/Sweep, with Sweep.uplugin, Source, Config, Resources and Doc visible; include the address bar proving no extra nested Sweep folder.",
+      "alt": "A correct project installation places Sweep.uplugin directly inside the Sweep plugin directory.",
+      "final_asset": "assets/media/install-folder.png"
+    },
+    {
+      "page": "01-getting-started/first-use/DESIGN.md",
+      "id": "first-run",
+      "kind": "gif",
+      "heading": "Try Sweep on a disposable Blueprint",
+      "caption": "A shared Variable Get can be distributed into local reads and restored with Undo.",
+      "capture_instructions": "Record Get Health connected to three separate consumer nodes, right-click its node body, choose Sweep > Distribute Variable Get, show the resulting local Gets, then Undo once to restore original wiring.",
+      "alt": "A shared Variable Get can be distributed into local reads and restored with Undo.",
+      "final_asset": "assets/media/first-run.gif"
+    },
+    {
+      "page": "02-operations/README.md",
+      "id": "operations-overview",
+      "kind": "image",
+      "heading": "Choose based on the graph",
+      "caption": "Distribute favors local sources and Consolidate favors fewer repeated Get nodes.",
+      "capture_instructions": "Create two side-by-side Blueprint before/after pairs using the same variable: Distribute one shared Get into three local Gets; Consolidate three equivalent Gets into one chosen survivor.",
+      "alt": "Distribute favors local sources and Consolidate favors fewer repeated Get nodes.",
+      "final_asset": "assets/media/operations-overview.png"
+    },
+    {
+      "page": "02-operations/distribute/DESIGN.md",
+      "id": "distribute-before-after",
+      "kind": "image",
+      "heading": "Exact steps",
+      "caption": "Distribute creates local Variable Gets beside the nodes that consume a shared value.",
+      "capture_instructions": "Capture the same Blueprint graph before and after distributing one Get Health into three local Gets, showing the old long wires, all three destination nodes and the new shorter wires.",
+      "alt": "Distribute creates local Variable Gets beside the nodes that consume a shared value.",
+      "final_asset": "assets/media/distribute-before-after.png"
+    },
+    {
+      "page": "02-operations/distribute/TECHNICAL.md",
+      "id": "distribute-traversal",
+      "kind": "image",
+      "heading": "Eligibility and analysis",
+      "caption": "Sweep follows reroute chains to terminal inputs and groups those inputs by destination node.",
+      "capture_instructions": "Draw one Get output through two reroutes into three terminal input pins on only two destination nodes. Label 3 terminal inputs and 2 replacement Gets to explain grouping.",
+      "alt": "Sweep follows reroute chains to terminal inputs and groups those inputs by destination node.",
+      "final_asset": "assets/media/distribute-traversal.png"
+    },
+    {
+      "page": "02-operations/consolidate/DESIGN.md",
+      "id": "consolidate-survivor",
+      "kind": "image",
+      "heading": "Exact steps",
+      "caption": "The right-clicked Variable Get survives while equivalent selected Gets transfer their connections to it.",
+      "capture_instructions": "Show before/after Blueprint captures with three equivalent Get Health nodes selected; highlight the one right-clicked and retained, then show its combined outgoing wires.",
+      "alt": "The right-clicked Variable Get survives while equivalent selected Gets transfer their connections to it.",
+      "final_asset": "assets/media/consolidate-survivor.png"
+    },
+    {
+      "page": "02-operations/consolidate/TECHNICAL.md",
+      "id": "consolidate-transfer",
+      "kind": "image",
+      "heading": "Failure rollback per source",
+      "caption": "Consolidation validates transferred connections and restores a rejected source when possible.",
+      "capture_instructions": "Draw an exact TryCreateConnection branch: success transfers outgoing wires and deletes redundant source; failure attempts to restore that source original links, not the entire batch.",
+      "alt": "Consolidation validates transferred connections and restores a rejected source when possible.",
+      "final_asset": "assets/media/consolidate-transfer.png"
+    },
+    {
+      "page": "02-operations/multi-selection/DESIGN.md",
+      "id": "selection-context",
+      "kind": "image",
+      "heading": "The right-click selection behavior",
+      "caption": "Sweep uses the graph selection captured before opening the context menu when the clicked Get was selected.",
+      "capture_instructions": "Capture three selected pure Variable Gets in Blueprint, right-click on one of those selected nodes, and show Sweep > Distribute Selected Variable Gets in the context menu.",
+      "alt": "Sweep uses the graph selection captured before opening the context menu when the clicked Get was selected.",
+      "final_asset": "assets/media/selection-context.png"
+    },
+    {
+      "page": "02-operations/multi-selection/TECHNICAL.md",
+      "id": "selection-snapshot",
+      "kind": "image",
+      "heading": "Selection snapshots",
+      "caption": "Sweep uses the stored selected Gets only when the right-clicked Get belonged to that selection.",
+      "capture_instructions": "Diagram focused Blueprint graph -> selection snapshot -> decision clicked Get in snapshot? Yes uses supported selected Gets; No falls back to clicked Get only.",
+      "alt": "Sweep uses the stored selected Gets only when the right-clicked Get belonged to that selection.",
+      "final_asset": "assets/media/selection-snapshot.png"
+    },
+    {
+      "page": "02-operations/decision-guide/DESIGN.md",
+      "id": "readability-choice",
+      "kind": "image",
+      "heading": "The visual tradeoff",
+      "caption": "Local variable reads reduce wire travel, while one shared source reduces repeated Get nodes.",
+      "capture_instructions": "Create one Blueprint example shown in two layouts with identical variable context: several local Gets beside consumers versus a single central Get with longer wires; label both tradeoffs.",
+      "alt": "Local variable reads reduce wire travel, while one shared source reduces repeated Get nodes.",
+      "final_asset": "assets/media/readability-choice.png"
+    },
+    {
+      "page": "03-graph-integrity/README.md",
+      "id": "integrity-summary",
+      "kind": "image",
+      "heading": "Three safety rules",
+      "caption": "Sweep validates variable identity, handles reroutes deliberately and uses Unreal K2 schema connections.",
+      "capture_instructions": "Create three labeled technical illustrations: identical VariableReference and context, reroute chains that remain or become unused, and K2 schema validating a new wire.",
+      "alt": "Sweep validates variable identity, handles reroutes deliberately and uses Unreal K2 schema connections.",
+      "final_asset": "assets/media/integrity-summary.png"
+    },
+    {
+      "page": "03-graph-integrity/reroutes/DESIGN.md",
+      "id": "reroutes-demo",
+      "kind": "gif",
+      "heading": "During Distribute",
+      "caption": "Distribution follows reroutes to the consumers and removes only reroutes with no remaining live output.",
+      "capture_instructions": "Record a Get feeding two consumer calculations through a two-deep branched reroute chain. Distribute it, showing new Gets near both consumers and an unrelated still-live reroute remaining.",
+      "alt": "Distribution follows reroutes to the consumers and removes only reroutes with no remaining live output.",
+      "final_asset": "assets/media/reroutes-demo.gif"
+    },
+    {
+      "page": "03-graph-integrity/reroutes/TECHNICAL.md",
+      "id": "reroutes-algorithm",
+      "kind": "image",
+      "heading": "Reachability cleanup",
+      "caption": "Orphaned reroutes are removed iteratively from downstream nodes back toward the old source.",
+      "capture_instructions": "Draw a before/after two-reroute chain; show downstream losing its outputs, then upstream becoming orphaned and both being removed, while a still-live branch remains.",
+      "alt": "Orphaned reroutes are removed iteratively from downstream nodes back toward the old source.",
+      "final_asset": "assets/media/reroutes-algorithm.png"
+    },
+    {
+      "page": "03-graph-integrity/equivalence/DESIGN.md",
+      "id": "context-comparison",
+      "kind": "image",
+      "heading": "Example: same variable, different target",
+      "caption": "Variable Gets with the same visible name are not equivalent when their target-object context differs.",
+      "capture_instructions": "Capture two Blueprint Get Health nodes with clearly labeled Target A and Target B object wires, plus an eligible pair reading from the same target; mark the two different-target Gets Not equivalent.",
+      "alt": "Variable Gets with the same visible name are not equivalent when their target-object context differs.",
+      "final_asset": "assets/media/context-comparison.png"
+    },
+    {
+      "page": "03-graph-integrity/equivalence/TECHNICAL.md",
+      "id": "equivalence-checks",
+      "kind": "image",
+      "heading": "Comparison implementation",
+      "caption": "Sweep checks the underlying variable reference and every relevant input-context field before consolidating.",
+      "capture_instructions": "Diagram the exact decision checks: same graph, pure Get, same VariableReference, SelfContextInfo, matching input names/count, defaults and same linked context pins. Show rejection on any mismatch.",
+      "alt": "Sweep checks the underlying variable reference and every relevant input-context field before consolidating.",
+      "final_asset": "assets/media/equivalence-checks.png"
+    },
+    {
+      "page": "03-graph-integrity/placement/DESIGN.md",
+      "id": "placement-demo",
+      "kind": "gif",
+      "heading": "Handling nearby nodes",
+      "caption": "Sweep positions local Gets near consuming inputs while leaving existing graph nodes in place.",
+      "capture_instructions": "Record a moderately crowded Blueprint graph inside a comment box; run Distribute and show a new local Get move to an available vertical position left of its destination without shifting existing nodes.",
+      "alt": "Sweep positions local Gets near consuming inputs while leaving existing graph nodes in place.",
+      "final_asset": "assets/media/placement-demo.gif"
+    },
+    {
+      "page": "03-graph-integrity/placement/TECHNICAL.md",
+      "id": "placement-search",
+      "kind": "image",
+      "heading": "Search strategy",
+      "caption": "Sweep tries nearby vertical positions and snaps the chosen Get to the Blueprint graph grid.",
+      "capture_instructions": "Create a graph-coordinate diagram with the initial point 220 units left of the destination, vertical candidate steps of 56 up/down, 18 clearance against nearby nodes and 16-unit grid snap.",
+      "alt": "Sweep tries nearby vertical positions and snaps the chosen Get to the Blueprint graph grid.",
+      "final_asset": "assets/media/placement-search.png"
+    },
+    {
+      "page": "03-graph-integrity/undo-redo/DESIGN.md",
+      "id": "undo-redo",
+      "kind": "gif",
+      "heading": "Best verification sequence",
+      "caption": "A complete Sweep refactor can be undone and redone as one Unreal Editor transaction.",
+      "capture_instructions": "Record a shared Get distributing into local Gets, press Undo to restore the exact original nodes and wires, then Redo to reapply the refactor. Keep the camera fixed.",
+      "alt": "A complete Sweep refactor can be undone and redone as one Unreal Editor transaction.",
+      "final_asset": "assets/media/undo-redo.gif"
+    },
+    {
+      "page": "03-graph-integrity/undo-redo/TECHNICAL.md",
+      "id": "transaction-boundary",
+      "kind": "image",
+      "heading": "Transaction boundaries",
+      "caption": "Sweep groups Blueprint, graph, node and schema connection changes inside one editor transaction.",
+      "capture_instructions": "Draw FScopedTransaction enclosing Blueprint Modify, Graph Modify, affected Get/consumer nodes, K2 schema TryCreateConnection, then MarkBlueprintAsModified and NotifyGraphChanged.",
+      "alt": "Sweep groups Blueprint, graph, node and schema connection changes inside one editor transaction.",
+      "final_asset": "assets/media/transaction-boundary.png"
+    },
+    {
+      "page": "04-implementation/README.md",
+      "id": "architecture-intro",
+      "kind": "image",
+      "heading": "Two C++ responsibilities",
+      "caption": "Sweep separates user-facing menu integration from the code that edits Blueprint graphs.",
+      "capture_instructions": "Diagram FSweepModule (context menus and selection snapshots) beside SweepOperations (analysis, equivalence, placement, rewiring), both connected to Unreal Blueprint graph and K2 schema.",
+      "alt": "Sweep separates user-facing menu integration from the code that edits Blueprint graphs.",
+      "final_asset": "assets/media/architecture-intro.png"
+    },
+    {
+      "page": "04-implementation/integration/DESIGN.md",
+      "id": "context-menu",
+      "kind": "image",
+      "heading": "Menu behavior",
+      "caption": "Sweep commands appear inside the native Blueprint Variable Get context menu when eligible.",
+      "capture_instructions": "Capture a real Blueprint Editor graph with a pure Variable Get node right-clicked; show the Sweep menu section with Distribute or Consolidate command visible and nearby connected nodes.",
+      "alt": "Sweep commands appear inside the native Blueprint Variable Get context menu when eligible.",
+      "final_asset": "assets/media/context-menu.png"
+    },
+    {
+      "page": "04-implementation/integration/TECHNICAL.md",
+      "id": "editor-registration",
+      "kind": "image",
+      "heading": "Registration and teardown",
+      "caption": "Sweep registers a GraphEditor menu extension and a selection snapshot ticker during its editor-module lifetime.",
+      "capture_instructions": "Create a lifecycle diagram: StartupModule registers FGraphEditorModule extender and FTSTicker; context-menu callback checks eligibility; ShutdownModule removes extender/ticker and clears weak snapshots.",
+      "alt": "Sweep registers a GraphEditor menu extension and a selection snapshot ticker during its editor-module lifetime.",
+      "final_asset": "assets/media/editor-registration.png"
+    },
+    {
+      "page": "04-implementation/algorithms/DESIGN.md",
+      "id": "algorithms-compare",
+      "kind": "image",
+      "heading": "Distribute at a glance",
+      "caption": "Distribution creates local sources while consolidation merges equivalent sources, retaining valid connections.",
+      "capture_instructions": "Create two short flowcharts: Analyze -> Group terminals -> Spawn local Gets -> Reconnect/Clean; and Verify equivalence -> Choose clicked anchor -> Transfer wires -> Delete redundant Gets.",
+      "alt": "Distribution creates local sources while consolidation merges equivalent sources, retaining valid connections.",
+      "final_asset": "assets/media/algorithms-compare.png"
+    },
+    {
+      "page": "04-implementation/algorithms/TECHNICAL.md",
+      "id": "data-ownership",
+      "kind": "image",
+      "heading": "Source organization",
+      "caption": "Sweep changes ordinary UEdGraph nodes and pin links rather than creating custom asset or runtime data.",
+      "capture_instructions": "Create a source ownership diagram showing SweepModule.cpp menu and snapshots, SweepOperations.cpp graph edit/transactions, and UEdGraph/UK2Node_VariableGet stored in Blueprint package; Editor-only module.",
+      "alt": "Sweep changes ordinary UEdGraph nodes and pin links rather than creating custom asset or runtime data.",
+      "final_asset": "assets/media/data-ownership.png"
+    },
+    {
+      "page": "05-support/README.md",
+      "id": "support-flow",
+      "kind": "image",
+      "heading": "Start with these checks",
+      "caption": "Sweep issues can usually be narrowed to menu availability, eligibility, selection or graph reconnection.",
+      "capture_instructions": "Create a simple troubleshooting flowchart with plugin enabled, K2 pure Get node body, valid terminal count or equivalent selection, then connection and layout outcomes; link branches to the manual.",
+      "alt": "Sweep issues can usually be narrowed to menu availability, eligibility, selection or graph reconnection.",
+      "final_asset": "assets/media/support-flow.png"
+    },
+    {
+      "page": "05-support/faq/DESIGN.md",
+      "id": "faq-different-target",
+      "kind": "image",
+      "heading": "Why can’t I merge two Gets named Health?",
+      "caption": "Two Gets with identical visible names can read different target objects and must remain separate.",
+      "capture_instructions": "Capture Target A -> Get Health and Target B -> Get Health in one Blueprint graph; make object target wires clearly visible and show they are not consolidation-equivalent.",
+      "alt": "Two Gets with identical visible names can read different target objects and must remain separate.",
+      "final_asset": "assets/media/faq-different-target.png"
+    },
+    {
+      "page": "05-support/troubleshooting/DESIGN.md",
+      "id": "troubleshoot-menu",
+      "kind": "image",
+      "heading": "Sweep is missing from the menu",
+      "caption": "The Sweep menu appears for eligible pure Variable Get node bodies rather than pin clicks or arbitrary nodes.",
+      "capture_instructions": "Capture a side-by-side Blueprint example: context menu from eligible Get node body showing Sweep, and context menu from its output pin not showing Sweep.",
+      "alt": "The Sweep menu appears for eligible pure Variable Get node bodies rather than pin clicks or arbitrary nodes.",
+      "final_asset": "assets/media/troubleshoot-menu.png"
+    },
+    {
+      "page": "05-support/troubleshooting/TECHNICAL.md",
+      "id": "triage-layers",
+      "kind": "image",
+      "heading": "Layered triage",
+      "caption": "Sweep diagnostics proceed from module and menu conditions through selection, eligibility and graph modifications.",
+      "capture_instructions": "Create a six-step technical flow: module load, menu filtering, snapshot selection, variable/consumer eligibility, schema reconnection, placement/transactions. Label each relevant C++ entry point.",
+      "alt": "Sweep diagnostics proceed from module and menu conditions through selection, eligibility and graph modifications.",
+      "final_asset": "assets/media/triage-layers.png"
+    },
+    {
+      "page": "05-support/updates/DESIGN.md",
+      "id": "update-folder",
+      "kind": "image",
+      "heading": "Install or update",
+      "caption": "Sweep updates should replace the complete plugin directory rather than mix release files.",
+      "capture_instructions": "Capture File Explorer showing a matching Sweep release ZIP and YourProject/Plugins/Sweep with Sweep.uplugin, Source, Resources and Config; indicate Unreal is closed during replacement.",
+      "alt": "Sweep updates should replace the complete plugin directory rather than mix release files.",
+      "final_asset": "assets/media/update-folder.png"
+    },
+    {
+      "page": "ROADMAP.md",
+      "id": "roadmap-history",
+      "kind": "image",
+      "heading": "History",
+      "caption": "Sweep v1.0.0 establishes conservative Variable Get refactoring while later ideas remain uncommitted.",
+      "capture_instructions": "Create a timeline with v1.0.0 Released (Distribute, Consolidate, reroutes, batch Undo), then clearly distinct Future Research (not planned) for eligibility messages, additional safe node types and performance validation.",
+      "alt": "Sweep v1.0.0 establishes conservative Variable Get refactoring while later ideas remain uncommitted.",
+      "final_asset": "assets/media/roadmap-history.png"
+    }
+  ]
+}
